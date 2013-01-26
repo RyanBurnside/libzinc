@@ -1,0 +1,20 @@
+
+
+This is a todo file of things that need to be done. 
+It will change dynamically as new things are added.
+Please do not remove text, simply tag it with "COMPLETE"
+
+
+Urgent (BUGS):
+
+Important (Necessary Features):
+ zdraw_horizontal - draw a horizontal line with any character with optional '+' endpoints.
+ zdraw_vertical - draw a horizontal line with any character with optional '+' endpoints.
+ zhide_cursor - hide the cursor
+ zshow_cursor - display the cursor
+ 
+
+Trivial (Optional but nice to support):
+ zdraw_line - draw a line to any two points with any character and optional '+' endpoints.
+ attribute modifying functions
+ maybe GUI elements such as wrapped text fields and pushable buttons
