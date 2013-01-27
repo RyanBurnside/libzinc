@@ -8,12 +8,23 @@
 static const char ESC(27);
 static std::stringstream text_to_string;
 
+
 std::string zval_to_str(unsigned int x)
 {
   // Convert a numeric value to string, good for paramters
   text_to_string.str(std::string());
   text_to_string << x;
   return text_to_string.str();
+}
+
+void zhide_cursor()
+{
+  std::cout << ESC << "[?25l";
+}
+
+void zshow_cursor()
+{
+  std::cout << ESC << "[?25h";
 }
 
 void zclear()
@@ -56,11 +67,44 @@ void zmove_put(unsigned int x, unsigned int y, std::string s)
   zput(s);
 }
 
-void zrect_put(unsigned int x, unsigned int y, unsigned int width, 
-	       unsigned int height, unsigned char c, bool frame)
+void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length, 
+		      unsigned char c, unsigned char b = '+')
+{
+  //Draw a horizontal line at a given location and length
+  for(unsigned int xx = 0; xx < length; ++xx)
+  {
+    if(xx == 0 || xx == length -1)	  //See if we are at the endpoints
+    {
+      zmove_put(x + xx, y, b);            //Draw endpoint character b
+    }
+    else				  //If we are not at the border
+    {
+      zmove_put(x + xx, y, c);	          //Draw part of the line using c
+    }
+  }
+}
+
+void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length, 
+		    unsigned char c, unsigned char b = '+')
+{
+  //Draw a vertical line at a given location and length
+  for(unsigned int yy = 0; yy < length; ++yy)
+  {
+    if(yy == 0 || yy == length -1)        //See if we are at the endpoints
+    {
+      zmove_put(x, y + yy, b);            //Draw endpoint character b
+    }
+    else				  //If we are not at the endpoints
+    {
+      zmove_put(x, y + yy, c);	          //Draw part of the line using c
+    }
+  }
+}
+
+void zdraw_block(unsigned int x, unsigned int y, unsigned int width, 
+		 unsigned int height, unsigned char c, bool frame)
 {
   // Draws a block of c, adds a border of '+' '-' and '|'
-
   for(unsigned int yy = 0; yy < height; ++yy)
   {
     for(unsigned int xx = 0; xx < width; ++xx)
@@ -98,66 +142,13 @@ void zrect_put(unsigned int x, unsigned int y, unsigned int width,
   }
 }
 
-void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length, unsigned char c, unsigned char b, bool frame)
+void zdraw_frame(unsigned int x, unsigned int y, unsigned int width, 
+		 unsigned int height, unsigned char corner = '+',
+		 unsigned char side = '|', unsigned char top = '-')
 {
-  //Draw a horizontal line at a given location and length
-  for(unsigned int xx = 0; xx < length; xx++)
-    {
-      if(frame)					//If a frame is requested...
-        {
-          if(xx == 0 || xx == length -1)	//See if we are at a border
-          {
-            zmove_put(x + xx, y, b);		//Draw Part of the border using character b
-          }
-          else					//If we are not at the border
-          {
-	    zmove_put(x + xx, y, c);		//Draw part of the line using c
-          }
-        }
-      else					//If a frame is NOT requested...
-        {
-          zmove_put(x + xx, y, c);		//Draw c for part of the line
-        }
-    }
+  // This is the proper way to draw a hollow frame.
+  zdraw_horizontal(x, y, width, top, corner);
+  zdraw_horizontal(x, y + height -1, width, top, corner);
+  zdraw_vertical(x, y, height, side, corner);
+  zdraw_vertical(x + width -1, y, height, side, corner);
 }
-
-void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length, unsigned char c, unsigned char b, bool frame)
-{
-  //Draw a vertical line at a given location and length
-  for(unsigned int yy = 0; yy < length; yy++)
-    {
-      if(frame)					//If a frame is requested...
-        {
-          if(yy == 0 || yy == length -1)	//See if we are at a border
-          {
-            zmove_put(x, y - yy, b);		//Draw Part of the border using character b
-          }
-          else					//If we are not at the border
-          {
-	    zmove_put(x, y - yy, c);		//Draw part of the line using c
-          }
-        }
-      else					//If a frame is NOT requested...
-        {
-          zmove_put(x, y - yy, c);		//Draw c for part of the line
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
