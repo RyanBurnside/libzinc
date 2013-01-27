@@ -8,25 +8,24 @@ Please do not remove text, simply tag it with "COMPLETE"
 Urgent (BUGS):
 
 
-Important (Necessary Features):
+IMPORTANT (NECESSARY FEATURES):
  Figure out how to read terminal sizes and handle size changes in virtuals
  Turn keyboard echoing off 
  Read from keyboard
+ begin work on zinc widgets library
 
-Trivial (Optional but nice to support):
+TRIVIAL (OPTIONAL BUT NICE TO SUPPORT):
  zdraw_line - draw a line to any two points with any character and optional '+' endpoints.
- 
- maybe GUI elements such as wrapped text fields and pushable buttons
 
+FEATURES FINISHED:
+ [DONE]zdraw_horizontal - draw a horizontal line with any character with 
+  optional '+' endpoints.
 
+ [DONE]	zdraw_vertical - draw a horizontal line with any character with 
+  optional '+' endpoints.
 
-Features Finished:
- [DONE]zdraw_horizontal - 
-   draw a horizontal line with any character with optional '+' endpoints.
+ [DONE] zhide_cursor - hide the cursor
 
- [DONE]	zdraw_vertical - 
-   draw a horizontal line with any character with optional '+' endpoints.
- [DONE] zhide_cursor - hide the cursor [DONE]
- [DONE] zshow_cursor - display the cursor [DONE]
+ [DONE] zshow_cursor - display the cursor
  
  [DONE] attribute modifying functions
