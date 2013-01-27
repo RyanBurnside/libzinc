@@ -17,6 +17,130 @@ std::string zval_to_str(unsigned int x)
   return text_to_string.str();
 }
 
+void zfont_reset()
+{
+  std::cout << ESC << "[0m";
+}
+
+void zfont_bold()
+{
+  std::cout << ESC << "[1m";
+}
+
+void zfont_dim()
+{
+  std::cout << ESC << "[2m";
+}
+
+void zfont_underline()
+{
+  std::cout << ESC << "[4m";
+}
+
+void zfont_blink()
+{
+  std::cout << ESC << "[5m";
+}
+
+void zvidya_reverse()
+{
+  std::cout << ESC << "[7m";
+}
+
+void zfont_hide_text()
+{
+  std::cout << ESC << "[8m";
+}
+
+//COLORS!!!!!!!!
+void zfont_black()
+{
+  std::cout << ESC << "[30m";
+}
+
+void zfont_red()
+{
+  std::cout << ESC << "[31m";
+}
+
+void zfont_green()
+{
+  std::cout << ESC << "[32m";
+}
+
+void zfont_yellow()
+{
+  std::cout << ESC << "[33m";
+}
+
+void zfont_blue()
+{
+  std::cout << ESC << "[34m";
+}
+
+void zfont_magenta()
+{
+  std::cout << ESC << "[35m";
+}
+
+void zfont_cyan()
+{
+  std::cout << ESC << "[36m";
+}
+
+void zfont_white()
+{
+  std::cout << ESC << "[37m";
+}
+
+//Background colors!!!
+
+void zbackfont_black()
+{
+  std::cout << ESC << "[40m";
+}
+
+void zbackfont_red()
+{
+  std::cout << ESC << "[41m";
+}
+
+void zbackfont_green()
+{
+  std::cout << ESC << "[42m";
+}
+
+void zbackfont_yellow()
+{
+  std::cout << ESC << "[43m";
+}
+
+void zbackfont_blue()
+{
+  std::cout << ESC << "[44m";
+}
+
+void zbackfont_magenta()
+{
+  std::cout << ESC << "[45m";
+}
+
+void zbackfont_cyan()
+{
+  std::cout << ESC << "[46m";
+}
+
+void zbackfont_white()
+{
+  std::cout << ESC << "[47m";
+}
+
+void zwrap(bool wrap)
+{
+  //AKA autowrap
+  std::cout << ESC << "[" << wrap << "h";
+}
+
 void zhide_cursor()
 {
   std::cout << ESC << "[?25l";
