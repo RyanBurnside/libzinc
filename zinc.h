@@ -98,3 +98,66 @@ void zrect_put(unsigned int x, unsigned int y, unsigned int width,
   }
 }
 
+void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length, unsigned char c, unsigned char b, bool frame)
+{
+  //Draw a horizontal line at a given location and length
+  for(unsigned int xx = 0; xx < length; xx++)
+    {
+      if(frame)					//If a frame is requested...
+        {
+          if(xx == 0 || xx == length -1)	//See if we are at a border
+          {
+            zmove_put(x + xx, y, b);		//Draw Part of the border using character b
+          }
+          else					//If we are not at the border
+          {
+	    zmove_put(x + xx, y, c);		//Draw part of the line using c
+          }
+        }
+      else					//If a frame is NOT requested...
+        {
+          zmove_put(x + xx, y, c);		//Draw c for part of the line
+        }
+    }
+}
+
+void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length, unsigned char c, unsigned char b, bool frame)
+{
+  //Draw a vertical line at a given location and length
+  for(unsigned int yy = 0; yy < length; yy++)
+    {
+      if(frame)					//If a frame is requested...
+        {
+          if(yy == 0 || yy == length -1)	//See if we are at a border
+          {
+            zmove_put(x, y - yy, b);		//Draw Part of the border using character b
+          }
+          else					//If we are not at the border
+          {
+	    zmove_put(x, y - yy, c);		//Draw part of the line using c
+          }
+        }
+      else					//If a frame is NOT requested...
+        {
+          zmove_put(x, y - yy, c);		//Draw c for part of the line
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
