@@ -225,47 +225,6 @@ void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length,
   }
 }
 
-void zdraw_block(unsigned int x, unsigned int y, unsigned int width, 
-		 unsigned int height, unsigned char c, bool frame)
-{
-  // Draws a block of c, adds a border of '+' '-' and '|'
-  for(unsigned int yy = 0; yy < height; ++yy)
-  {
-    for(unsigned int xx = 0; xx < width; ++xx)
-    {
-      if(frame)                               // if border enabled
-      {
-	if(yy == 0 || yy == height -1)        // if on top or bottom
-	{
-	  if(xx == 0 or xx == width -1)       // if corner
-	  {
-	    zmove_put(x + xx, y + yy, '+');   // draw the 4 '+'
-	  }
-	  else                                // position not corner
-	  {
-	    zmove_put(x + xx, y + yy, '-');   // draw '-'
-	  }
-	}
-	else if(xx == 0 || xx == width -1)    // if on sides
-	{
-	  if(yy > 0 && yy < height -1)        // do not allow overlap corners
-	  {
-	    zmove_put(x + xx, y + yy, '|');   // place verticle '|'
-	  }
-	}
-	else                                  // just an inner fill character
-	{
-	  zmove_put(x + xx, y + yy, c);       // not border, draw c
-	}
-      }
-      else
-      {
-	zmove_put(x + xx, y + yy, c);         
-      }
-    }
-  }
-}
-
 void zdraw_frame(unsigned int x, unsigned int y, unsigned int width, 
 		 unsigned int height, unsigned char corner = '+',
 		 unsigned char side = '|', unsigned char top = '-')
@@ -275,4 +234,29 @@ void zdraw_frame(unsigned int x, unsigned int y, unsigned int width,
   zdraw_horizontal(x, y + height -1, width, top, corner);
   zdraw_vertical(x, y, height, side, corner);
   zdraw_vertical(x + width -1, y, height, side, corner);
+}
+
+
+void zdraw_block(unsigned int x, unsigned int y, unsigned int width, 
+		 unsigned int height, unsigned char c, 
+		 unsigned char corner = ' ',
+		 unsigned char side = ' ', unsigned char top = ' ')
+{
+  // Draws and entire block or character c
+  // Border elements can be specified or simply left as filler spaces
+
+  // draw the outside frame
+  zdraw_frame(x, y, width, height, corner, side, top);
+
+  // Draw inside frame
+  if(width > 0 && height > 0)
+  {
+    for(unsigned int yy = 0; yy < height - 2; ++yy)
+    {
+      for(unsigned int xx = 0; xx < width - 2; ++xx)
+      {
+	zmove_put(x + 1 + xx, y + 1 + yy, c);
+      }
+    }
+  }
 }
