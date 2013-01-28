@@ -2,6 +2,9 @@
 // A simple and light vt100 library
 // Ryan Burnside and Joshua Stylen 2013
 
+#ifndef ZINC_H
+#define ZINC_H
+
 #include <iostream>
 #include <sstream>
 
@@ -9,7 +12,7 @@ static const char ESC(27);
 static std::stringstream text_to_string;
 
 
-std::string zval_to_str(unsigned int x)
+inline std::string zval_to_str(unsigned int x)
 {
   // Convert a numeric value to string, good for paramters
   text_to_string.str(std::string());
@@ -17,147 +20,147 @@ std::string zval_to_str(unsigned int x)
   return text_to_string.str();
 }
 
-void zfont_reset()
+inline void zfont_reset()
 {
   std::cout << ESC << "[0m";
 }
 
-void zfont_bold()
+inline void zfont_bold()
 {
   std::cout << ESC << "[1m";
 }
 
-void zfont_dim()
+inline void zfont_dim()
 {
   std::cout << ESC << "[2m";
 }
 
-void zfont_underline()
+inline void zfont_underline()
 {
   std::cout << ESC << "[4m";
 }
 
-void zfont_blink()
+inline void zfont_blink()
 {
   std::cout << ESC << "[5m";
 }
 
-void zvidya_reverse()
+inline void zvidya_reverse()
 {
   std::cout << ESC << "[7m";
 }
 
-void zfont_hide_text()
+inline void zfont_hide_text()
 {
   std::cout << ESC << "[8m";
 }
 
 //COLORS!!!!!!!!
-void zfont_black()
+inline void zfont_black()
 {
   std::cout << ESC << "[30m";
 }
 
-void zfont_red()
+inline void zfont_red()
 {
   std::cout << ESC << "[31m";
 }
 
-void zfont_green()
+inline void zfont_green()
 {
   std::cout << ESC << "[32m";
 }
 
-void zfont_yellow()
+inline void zfont_yellow()
 {
   std::cout << ESC << "[33m";
 }
 
-void zfont_blue()
+inline void zfont_blue()
 {
   std::cout << ESC << "[34m";
 }
 
-void zfont_magenta()
+inline void zfont_magenta()
 {
   std::cout << ESC << "[35m";
 }
 
-void zfont_cyan()
+inline void zfont_cyan()
 {
   std::cout << ESC << "[36m";
 }
 
-void zfont_white()
+inline void zfont_white()
 {
   std::cout << ESC << "[37m";
 }
 
 //Background colors!!!
 
-void zbackfont_black()
+inline void zbackfont_black()
 {
   std::cout << ESC << "[40m";
 }
 
-void zbackfont_red()
+inline void zbackfont_red()
 {
   std::cout << ESC << "[41m";
 }
 
-void zbackfont_green()
+inline void zbackfont_green()
 {
   std::cout << ESC << "[42m";
 }
 
-void zbackfont_yellow()
+inline void zbackfont_yellow()
 {
   std::cout << ESC << "[43m";
 }
 
-void zbackfont_blue()
+inline void zbackfont_blue()
 {
   std::cout << ESC << "[44m";
 }
 
-void zbackfont_magenta()
+inline void zbackfont_magenta()
 {
   std::cout << ESC << "[45m";
 }
 
-void zbackfont_cyan()
+inline void zbackfont_cyan()
 {
   std::cout << ESC << "[46m";
 }
 
-void zbackfont_white()
+inline void zbackfont_white()
 {
   std::cout << ESC << "[47m";
 }
 
-void zwrap(bool wrap)
+inline void zwrap(bool wrap)
 {
   //AKA autowrap
   std::cout << ESC << "[" << wrap << "h";
 }
 
-void zhide_cursor()
+inline void zhide_cursor()
 {
   std::cout << ESC << "[?25l";
 }
 
-void zshow_cursor()
+inline void zshow_cursor()
 {
   std::cout << ESC << "[?25h";
 }
 
-void zclear()
+inline void zclear()
 {
   // Write the screen clear character
   std::cout << ESC << "[2J";
 }
 
-void zmove(unsigned int x, unsigned int y)
+inline void zmove(unsigned int x, unsigned int y)
 {
   // Move the cursor, no writing
   std::string row = zval_to_str(y).c_str();
@@ -165,33 +168,33 @@ void zmove(unsigned int x, unsigned int y)
   std::cout << ESC << "[" << row << ';' << column << 'f';
 }
 
-void zput(unsigned char c)
+inline void zput(unsigned char c)
 {
   // Put character at current cursor
   std::cout << c;
 }
 
-void zput(std::string s)
+inline void zput(std::string s)
 {
   // Put string at current cursor
   std::cout << s;
 }
 
-void zmove_put(unsigned int x, unsigned int y, unsigned char c)
+inline void zmove_put(unsigned int x, unsigned int y, unsigned char c)
 {
   // Move the cursor, put a character
   zmove(x, y);
   zput(c);
 }
 
-void zmove_put(unsigned int x, unsigned int y, std::string s)
+inline void zmove_put(unsigned int x, unsigned int y, std::string s)
 {
   // Move the cursor, put a character
   zmove(x, y);
   zput(s);
 }
 
-void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length, 
+inline void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length, 
 		      unsigned char c, unsigned char b = '+')
 {
   //Draw a horizontal line at a given location and length
@@ -208,7 +211,7 @@ void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length,
   }
 }
 
-void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length, 
+inline void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length, 
 		    unsigned char c, unsigned char b = '+')
 {
   //Draw a vertical line at a given location and length
@@ -225,7 +228,7 @@ void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length,
   }
 }
 
-void zdraw_frame(unsigned int x, unsigned int y, unsigned int width, 
+inline void zdraw_frame(unsigned int x, unsigned int y, unsigned int width, 
 		 unsigned int height, unsigned char corner = '+',
 		 unsigned char side = '|', unsigned char top = '-')
 {
@@ -237,7 +240,7 @@ void zdraw_frame(unsigned int x, unsigned int y, unsigned int width,
 }
 
 
-void zdraw_block(unsigned int x, unsigned int y, unsigned int width, 
+inline void zdraw_block(unsigned int x, unsigned int y, unsigned int width, 
 		 unsigned int height, unsigned char c, 
 		 unsigned char corner = ' ',
 		 unsigned char side = ' ', unsigned char top = ' ')
@@ -260,3 +263,5 @@ void zdraw_block(unsigned int x, unsigned int y, unsigned int width,
     }
   }
 }
+
+#endif
