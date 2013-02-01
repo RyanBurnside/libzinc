@@ -11,7 +11,6 @@
 static const char ESC(27);
 static std::stringstream text_to_string;
 
-
 inline std::string zval_to_str(unsigned int x)
 {
   // Convert a numeric value to string, good for paramters
