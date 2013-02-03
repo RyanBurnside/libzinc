@@ -9,7 +9,7 @@ protected:
   int x, y, width, height;
   unsigned char fill_char;
   std::string label;
-  
+
 public:
   Zwidget(int x, int y, int width, int height);
   virtual ~Zwidget();
@@ -22,7 +22,7 @@ public:
   virtual unsigned char get_fill_char();
   virtual std::string get_label();
   virtual void draw();
-  virtual void update();  
+  virtual void update();
 };
 
 #endif
