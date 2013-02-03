@@ -7,6 +7,7 @@ Zwidget::Zwidget(int x, int y, int width, int height)
   this->width = width;
   this->height = height;
   this->label = "";
+  this->fill_char = ' ';
 }
 
 Zwidget::~Zwidget(){};
@@ -45,9 +46,19 @@ std::string Zwidget::get_label()
   return label;
 }
 
+void Zwidget::set_fill_char(unsigned char c)
+{
+  fill_char = c;
+}
+
+unsigned char Zwidget::get_fill_char()
+{
+  return fill_char;
+}
+
 void Zwidget::draw()
 {
-  zdraw_block(x, y, width, height, ' ', '+', '|', '-');
+  zdraw_block(x, y, width, height, fill_char, '+', '|', '-');
 };
 
 void Zwidget::update()
