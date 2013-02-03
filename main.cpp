@@ -8,8 +8,8 @@ int main()
   zclear();
   Zwindow z(5, 5, 70, 14);
   z.set_label("ZORK");
-  Zbutton b(7, 17, 8);
-  Zbutton c( 23, 17, 8);
+  Zbutton b(57, 17, 8);
+  Zbutton c(66, 17, 8);
   b.set_label("OK");
   c.set_label("CANCEL");
 
