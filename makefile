@@ -1,11 +1,13 @@
-#Check correctness of linking, are both .o files needed?
-# Zwidget is the base for Zwindow
+# Zwidget is the base for Zwindow and Zbutton
 
-test: main.cpp Zwindow.o Zwidget.o
-	g++ -o test main.cpp Zwindow.o Zwidget.o
+test: main.cpp Zwidget.o Zwindow.o Zbutton.o
+	g++ -o test main.cpp Zwidget.o Zwindow.o Zbutton.o
 
-Zwindow.o: Zwindow.cpp Zwindow.h
+Zbutton.o: Zbutton.cpp Zbutton.h zinc.h
+	g++ -c Zbutton.cpp
+
+Zwindow.o: Zwindow.cpp Zwindow.h zinc.h
 	g++ -c Zwindow.cpp
 
-Zwidget.o: Zwidget.cpp Zwidget.h
+Zwidget.o: Zwidget.cpp Zwidget.h zinc.h
 	g++ -c Zwidget.cpp

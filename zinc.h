@@ -4,7 +4,6 @@
 
 #ifndef ZINC_H
 #define ZINC_H
-
 #include <iostream>
 #include <sstream>
 
@@ -251,7 +250,7 @@ inline void zdraw_block(unsigned int x, unsigned int y, unsigned int width,
   zdraw_frame(x, y, width, height, corner, side, top);
 
   // Draw inside frame
-  if(width > 0 && height > 0)
+  if(width >= 2 && height >= 2)
   {
     for(unsigned int yy = 0; yy < height - 2; ++yy)
     {
