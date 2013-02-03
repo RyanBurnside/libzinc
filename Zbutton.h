@@ -1,5 +1,5 @@
-#ifndef ZWINDOW_H
-#define ZWINDOW_H
+#ifndef ZBUTTON_H
+#define ZBUTTON_H
 #include "Zwidget.h"
 
 class Zbutton : public Zwidget // Zbutton extends Zwidget
