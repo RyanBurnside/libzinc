@@ -1,13 +1,40 @@
-# Zwidget is the base for Zwindow and Zbutton
+BIN:=test
 
-test: main.cpp Zwidget.o Zwindow.o Zbutton.o
-	g++ -o test main.cpp Zwidget.o Zwindow.o Zbutton.o
+SOURCES:=\
+  main.cpp \
+  Zbutton.cpp \
+  Zwidget.cpp \
+  Zwindow.cpp \
+  zinc.cpp
 
-Zbutton.o: Zbutton.cpp Zbutton.h zinc.h
-	g++ -c Zbutton.cpp
+OBJECTS:=\
+  main.o \
+  Zbutton.o \
+  Zwidget.o \
+  Zwindow.o \
+  zinc.o
 
-Zwindow.o: Zwindow.cpp Zwindow.h zinc.h
-	g++ -c Zwindow.cpp
+.PHONY: all clean
+
+all: $(BIN)
+
+$(BIN): $(OBJECTS)
+	$(CXX) $(CFLAGS) $(CXXFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
+
+main.o: main.cpp zinc.h Zwidget.h Zwindow.h Zbutton.h
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+
+Zbutton.o: Zbutton.cpp Zbutton.h Zwidget.h zinc.h
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 Zwidget.o: Zwidget.cpp Zwidget.h zinc.h
-	g++ -c Zwidget.cpp
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+
+Zwindow.o: Zwindow.cpp Zwindow.h Zwidget.h zinc.h
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+
+zinc.o: zinc.cpp zinc.h
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+
+clean:
+	$(RM) $(OBJECTS) $(BIN)
