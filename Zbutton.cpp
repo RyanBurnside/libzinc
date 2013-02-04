@@ -1,9 +1,9 @@
 #include "Zbutton.h"
 
-Zbutton::Zbutton(int x, int y, int width) : 
+Zbutton::Zbutton(int x, int y, int width) :
   Zwidget(x, y, width, 1)
 {
-   // blank for now. 
+   // blank for now.
    // No extra member variables beyond what is already made in base class
 }
 
@@ -14,6 +14,6 @@ void Zbutton::update()
   std::string pad((width-2) - sliced.length(), ' ');
   sliced = '[' + sliced;
   sliced += pad;
-  sliced += ']'; 
+  sliced += ']';
   zmove_put(x, y, sliced); // draw the label on the border
 }

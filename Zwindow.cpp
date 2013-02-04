@@ -1,9 +1,11 @@
 #include "Zwindow.h"
 
-Zwindow::Zwindow(int x, int y, int width, int height) : 
+#include "Zwidget.h"
+
+Zwindow::Zwindow(int x, int y, int width, int height) :
   Zwidget(x, y, width, height)
 {
-   // blank for now. 
+   // blank for now.
    // No extra member variables beyond what is already made in base class
 }
 
