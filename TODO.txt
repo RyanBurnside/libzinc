@@ -5,27 +5,28 @@ It will change dynamically as new things are added.
 Please do not remove text, simply tag it with "COMPLETE"
 
 
-Urgent (BUGS):
+Urgent (BUGS): ----------------------------------------------------------------
 
 
-IMPORTANT (NECESSARY FEATURES):
+IMPORTANT (NECESSARY FEATURES): -----------------------------------------------
  Figure out how to read terminal sizes and handle size changes in virtuals
 
  Turn keyboard echoing off 
 
  Read from keyboard
   
- Drawing speed is horribly slow, other programs manipulate ream terms faster
- this might because they draw lines instead of characters.
-
  Use a buffer system to ensure that the terminal only draws characters that
  need to he updated rather than drawing over the same character.
  
+ Handle drawing off the screen. Currently it wraps botching the image.
 
-TRIVIAL (OPTIONAL BUT NICE TO SUPPORT):
- zdraw_line - draw a line to any two points with any character and optional '+' endpoints.
 
-FEATURES FINISHED:
+TRIVIAL (OPTIONAL BUT NICE TO SUPPORT):----------------------------------------
+ zdraw_line - draw a line to any two points with any character and 
+  optional '+' endpoints.
+
+
+FEATURES FINISHED:-------------------------------------------------------------
 
 [DONE]zdraw_horizontal - draw a horizontal line with any character with 
   optional '+' endpoints.
@@ -38,3 +39,6 @@ FEATURES FINISHED:
  [DONE] zshow_cursor - display the cursor
  
  [DONE] attribute modifying functions
+
+ [DONE]  Drawing speed is horribly slow, other programs manipulate ream terms 
+  faster this might because they draw lines instead of characters.

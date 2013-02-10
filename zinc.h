@@ -7,9 +7,9 @@
 #include <iostream>
 #include <sstream>
 
-#ifndef ZINC_INLINE
-#define ZINC_INLINE inline
-#endif
+ #ifndef ZINC_INLINE
+ #define ZINC_INLINE inline
+ #endif
 
 static const char ESC(27);
 static std::stringstream text_to_string;
@@ -192,29 +192,28 @@ ZINC_INLINE void zmove_put(unsigned int x, unsigned int y, unsigned char c)
 ZINC_INLINE void zmove_put(unsigned int x, unsigned int y, std::string s)
 {
   // Move the cursor, put a character
+  // This should be used instead of the char version for lines of text
   zmove(x, y);
   zput(s);
 }
 
-ZINC_INLINE void zdraw_horizontal(unsigned int x, unsigned int y, unsigned int length,
-		      unsigned char c, unsigned char b = '+')
+ZINC_INLINE void zdraw_horizontal(unsigned int x, unsigned int y, 
+				  unsigned int length, unsigned char c, 
+				  unsigned char b = '+')
 {
-  //Draw a horizontal line at a given location and length
-  for(unsigned int xx = 0; xx < length; ++xx)
+  // make a single horizontal string, then add endpoints
+  if(length > 1)
   {
-    if(xx == 0 || xx == length -1)	  //See if we are at the endpoints
-    {
-      zmove_put(x + xx, y, b);            //Draw endpoint character b
-    }
-    else				  //If we are not at the border
-    {
-      zmove_put(x + xx, y, c);	          //Draw part of the line using c
-    }
+    std::string temp(1, b);
+    temp += std::string(length - 2, c);
+    temp += b;
+    zmove_put(x, y, temp);
   }
 }
 
-ZINC_INLINE void zdraw_vertical(unsigned int x, unsigned int y, unsigned int length,
-		    unsigned char c, unsigned char b = '+')
+ZINC_INLINE void zdraw_vertical(unsigned int x, unsigned int y, 
+				unsigned int length, unsigned char c, 
+				unsigned char b = '+')
 {
   //Draw a vertical line at a given location and length
   for(unsigned int yy = 0; yy < length; ++yy)
@@ -230,9 +229,10 @@ ZINC_INLINE void zdraw_vertical(unsigned int x, unsigned int y, unsigned int len
   }
 }
 
-ZINC_INLINE void zdraw_frame(unsigned int x, unsigned int y, unsigned int width,
-		 unsigned int height, unsigned char corner = '+',
-		 unsigned char side = '|', unsigned char top = '-')
+ZINC_INLINE void zdraw_frame(unsigned int x, unsigned int y, 
+			     unsigned int width, unsigned int height, 
+			     unsigned char corner = '+', 
+			     unsigned char side = '|', unsigned char top = '-')
 {
   // This is the proper way to draw a hollow frame.
   zdraw_horizontal(x, y, width, top, corner);
@@ -242,26 +242,23 @@ ZINC_INLINE void zdraw_frame(unsigned int x, unsigned int y, unsigned int width,
 }
 
 
-ZINC_INLINE void zdraw_block(unsigned int x, unsigned int y, unsigned int width,
-		 unsigned int height, unsigned char c,
-		 unsigned char corner = ' ',
-		 unsigned char side = ' ', unsigned char top = ' ')
+ZINC_INLINE void zdraw_block(unsigned int x, unsigned int y, 
+			     unsigned int width, unsigned int height, 
+			     unsigned char c, unsigned char corner = ' ',
+			     unsigned char side = ' ', unsigned char top = ' ')
 {
   // Draws and entire block or character c
   // Border elements can be specified or simply left as filler spaces
 
   // draw the outside frame
   zdraw_frame(x, y, width, height, corner, side, top);
-
+  std::string buffer_fill(width - 2, c);
   // Draw inside frame
   if(width >= 2 && height >= 2)
   {
     for(unsigned int yy = 0; yy < height - 2; ++yy)
     {
-      for(unsigned int xx = 0; xx < width - 2; ++xx)
-      {
-	zmove_put(x + 1 + xx, y + 1 + yy, c);
-      }
+      zmove_put(x + 1, y + yy + 1, buffer_fill);
     }
   }
 }

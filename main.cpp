@@ -6,16 +6,15 @@
 int main()
 {
   zclear();
-  Zwindow z(5, 5, 70, 14);
-  z.set_label("ZORK");
-  Zbutton b(57, 17, 8);
-  Zbutton c(66, 17, 8);
-  b.set_label("OK");
-  c.set_label("CANCEL");
+  for(int i = 1; i < 5; ++i)
+  {
+    Zwindow z(i * 2, i * 2, 72, 16);
+    std::string label = "Window ";
+    label += char(i + 48);
+    z.set_label(label);
+    z.update();
+  }
 
-  z.update();
-  b.update();
-  c.update();
   zmove(0, 24);
   std::cout << std::endl;
   return 0;
