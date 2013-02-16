@@ -3,6 +3,7 @@ BIN:=test
 SOURCES:=\
   main.cpp \
   Zbutton.cpp \
+  Ztextview.cpp \
   Zwidget.cpp \
   Zwindow.cpp \
   zinc.cpp
@@ -10,6 +11,7 @@ SOURCES:=\
 OBJECTS:=\
   main.o \
   Zbutton.o \
+  Ztextview.o \
   Zwidget.o \
   Zwindow.o \
   zinc.o
@@ -25,6 +27,9 @@ main.o: main.cpp zinc.h Zwidget.h Zwindow.h Zbutton.h
 	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 Zbutton.o: Zbutton.cpp Zbutton.h Zwidget.h zinc.h
+	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+
+Ztextview.o: Ztextview.cpp Ztextview.h Zwidget.h zinc.h
 	$(CXX) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 Zwidget.o: Zwidget.cpp Zwidget.h zinc.h
